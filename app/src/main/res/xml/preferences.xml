@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="@string/pref_key_phone_number"
+        android:title="@string/pref_name_phone_number" />
+
+    <EditTextPreference
+        android:key="@string/pref_key_puk"
+        android:title="@string/pref_name_puk" />
+
+</PreferenceScreen>

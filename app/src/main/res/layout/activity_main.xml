@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/phone_number_hint" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_puk"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/puk_hint" />
+
+        <ImageView
+            android:id="@+id/captcha"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_captcha"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/captcha_hint" />
+
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/check" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="[Loading...]" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="[Something went wrong]" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

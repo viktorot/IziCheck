@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">IziCheck</string>
+
+    <string name="phone_number_hint">Phone number</string>
+    <string name="puk_hint">PUK code</string>
+    <string name="captcha_hint">Captcha</string>
+    <string name="check">Check</string>
+    <string name="loading">Loading…</string>
+    <string name="balance">Balance</string>
+    <string name="ok">OK</string>
+
+
+    <string name="pref_key_phone_number">phone_number</string>
+    <string name="pref_name_phone_number">Phone number</string>
+
+    <string name="pref_key_puk">puk_code</string>
+    <string name="pref_name_puk">PUK code</string>
+</resources>
