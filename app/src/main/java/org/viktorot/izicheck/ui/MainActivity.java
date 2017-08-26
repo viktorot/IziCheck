@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText etPuk;
     private EditText etCaptcha;
     private ImageView imgCaptcha;
+    private Button btnCheck;
 
     private IziApiClient apiClient = new IziApiClient();
 
-    private IziData data;
+    private IziData data = new IziData();
 
     private Storage storage;
 
@@ -62,12 +63,20 @@ public class MainActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.et_number);
         etPuk = findViewById(R.id.et_puk);
         etCaptcha = findViewById(R.id.et_captcha);
-        Button check = findViewById(R.id.btn_check);
-        check.setOnClickListener(view -> check());
+        btnCheck = findViewById(R.id.btn_check);
+        btnCheck.setOnClickListener(view -> check());
 
         imgCaptcha = findViewById(R.id.captcha);
+    }
 
-        get();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        populateUIFromStorage();
+
+        if (!data.isSet()) {
+            get();
+        }
     }
 
     @Override
@@ -94,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 .doOnSubscribe((disposable) -> {
                     hideErrorLayout();
                     hideDataLayout();
+                    disableCheckButton();
                     showLoading();
                 })
                 .map(IziData::new)
@@ -110,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe((disposable) -> {
                     Log.w(TAG, Thread.currentThread().getName());
+                    disableCheckButton();
                     showLoading();
                 })
                 .map(IziHtmlParser::parseAccountBalance)
@@ -125,32 +136,37 @@ public class MainActivity extends AppCompatActivity {
 
         hideErrorLayout();
         hideLoading();
+        enableCheckButton();
         showDataLayout();
 
-        populateDataFromStorage();
+        etCaptcha.setText("");
         setCaptcha(data.captchaUrl);
     }
 
     private void onAccountBalanceReceived(String balance) {
         hideLoading();
         hideErrorLayout();
+        enableCheckButton();
+
+        // TODO: show try again
 
         new MaterialDialog.Builder(this)
                 .title(R.string.balance)
                 .content(balance)
-                .positiveText(R.string.balance)
+                .positiveText(R.string.ok)
                 .show();
     }
 
     private void onError(Throwable error) throws Exception {
-        Log.e(TAG, "got some error", error);
+        Log.e(TAG, "something went wrong", error);
 
         hideLoading();
         hideDataLayout();
+        enableCheckButton();
         showErrorLayout();
     }
 
-    private void populateDataFromStorage() {
+    private void populateUIFromStorage() {
         etPhone.setText(storage.getPhoneNumber());
         etPuk.setText(storage.getPuk());
     }
@@ -177,6 +193,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideErrorLayout() {
         errorLayout.setVisibility(View.GONE);
+    }
+
+    private void enableCheckButton() {
+        btnCheck.setEnabled(true);
+    }
+
+    private void disableCheckButton() {
+        btnCheck.setEnabled(false);
     }
 
     private void setCaptcha(String url) {

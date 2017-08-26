@@ -11,6 +11,7 @@ public class Storage {
 
     private final String KEY_PHONE_NUMBER;
     private final String KEY_PUK;
+    private final String KEY_INITED;
 
     private SharedPreferences sharedPreferences;
 
@@ -18,10 +19,21 @@ public class Storage {
         sharedPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         KEY_PHONE_NUMBER = context.getString(R.string.pref_key_phone_number);
         KEY_PUK = context.getString(R.string.pref_key_puk);
+        KEY_INITED = context.getString(R.string.pref_key_inited);
     }
 
     private SharedPreferences.Editor getEditor() {
         return sharedPreferences.edit();
+    }
+
+    public void saveInited(boolean inited) {
+        SharedPreferences.Editor editor = getEditor();
+        editor.putBoolean(KEY_INITED, inited);
+        editor.apply();
+    }
+
+    public boolean isInited() {
+        return sharedPreferences.getBoolean(KEY_INITED, false);
     }
 
     public void savePhoneNumber(@NonNull String number) {

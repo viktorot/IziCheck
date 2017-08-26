@@ -18,6 +18,12 @@ public class IziApplication extends Application {
         super.onCreate();
 
         storage = new Storage(getApplicationContext());
+
+        if (!storage.isInited()) {
+            storage.savePhoneNumber(BuildConfig.DEFAULT_PHONE_NUMBER);
+            storage.savePuk(BuildConfig.DEFAULT_PUK);
+            storage.saveInited(true);
+        }
     }
 
     public Storage getStorage() {
