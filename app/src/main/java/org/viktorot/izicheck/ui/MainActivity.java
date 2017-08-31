@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void onError(Throwable error) throws Exception {
+    private void onError(Throwable error) {
         Log.e(TAG, "something went wrong", error);
 
         hideLoading();

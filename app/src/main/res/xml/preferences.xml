@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="[Test]">
+    <android.support.v7.preference.PreferenceCategory android:title="[Test]">
 
-        <EditTextPreference
+        <android.support.v7.preference.EditTextPreference
             android:key="@string/pref_key_phone_number"
             android:title="@string/pref_name_phone_number" />
 
-        <EditTextPreference
+        <android.support.v7.preference.EditTextPreference
             android:key="@string/pref_key_puk"
             android:title="@string/pref_name_puk" />
 
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-</PreferenceScreen>
+</android.support.v7.preference.PreferenceScreen>

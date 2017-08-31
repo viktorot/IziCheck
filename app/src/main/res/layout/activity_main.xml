@@ -5,70 +5,71 @@
     android:layout_height="match_parent"
     android:padding="20dp">
 
-    <LinearLayout
-        android:id="@+id/data_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_number"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/phone_number_hint" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_puk"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/puk_hint" />
-
-        <ImageView
-            android:id="@+id/captcha"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="fitCenter" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_captcha"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="textCapCharacters"
-            android:hint="@string/captcha_hint" />
-
-        <Button
-            android:id="@+id/btn_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/check" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/loading_layout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="[Loading...]" />
+        <LinearLayout
+            android:id="@+id/data_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_number"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/phone_number_hint" />
 
-    <RelativeLayout
-        android:id="@+id/error_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_puk"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/puk_hint" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="[Something went wrong]" />
+            <ImageView
+                android:id="@+id/captcha"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter" />
 
-    </RelativeLayout>
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_captcha"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/captcha_hint"
+                android:inputType="textCapCharacters" />
+
+            <Button
+                android:id="@+id/btn_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/check" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="[Something went wrong]" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="[Swipe down to retry]" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

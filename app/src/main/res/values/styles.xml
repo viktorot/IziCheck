@@ -6,6 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="preferenceTheme">@style/IziPreferenceTheme</item>
+    </style>
+
+    <style name="IziPreferenceTheme" parent="PreferenceThemeOverlay">
+        <item name="preferenceCategoryStyle">@style/IziPreferenceCategory</item>
+        <item name="editTextPreferenceStyle">@style/IziPreference</item>
+    </style>
+
+    <style name="IziPreference" parent="Preference">
+        <item name="android:layout">@layout/preference_item</item>
+    </style>
+
+    <style name="IziPreferenceCategory" parent="Preference.Category">
+        <item name="android:layout">@layout/preference_category_title</item>
     </style>
 
 </resources>
