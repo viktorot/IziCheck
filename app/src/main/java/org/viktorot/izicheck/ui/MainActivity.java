@@ -26,6 +26,8 @@ import org.viktorot.izicheck.parser.IziHtmlParser;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private IziData data = new IziData();
 
     private Storage storage;
+
+    private CompositeDisposable compositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +76,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        compositeDisposable = new CompositeDisposable();
         populateUIFromStorage();
 
         if (!data.isSet()) {
             get();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        if (compositeDisposable != null) {
+            compositeDisposable.dispose();
+        }
+        super.onStop();
     }
 
     @Override
@@ -98,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void get() {
-        apiClient.getHtml()
+        Disposable disp = apiClient.getHtml()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe((disposable) -> {
                     hideErrorLayout();
@@ -109,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 .map(IziData::new)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onDataReceived, this::onError);
+
+        compositeDisposable.add(disp);
     }
 
     private void check() {
@@ -116,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         this.data.puk = etPuk.getText().toString();
         this.data.captcha = etCaptcha.getText().toString();
 
-        apiClient.check(this.data)
+        Disposable disp = apiClient.check(this.data)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe((disposable) -> {
                     Log.w(TAG, Thread.currentThread().getName());
@@ -127,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                 .delay(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onAccountBalanceReceived, this::onError);
+
+        compositeDisposable.add(disp);
     }
 
     private void onDataReceived(IziData data) {
